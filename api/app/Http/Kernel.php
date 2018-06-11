@@ -1,9 +1,10 @@
 <?php
     
     namespace App\Http;
-    
+
+    use Barryvdh\Cors\HandleCors;
     use Illuminate\Foundation\Http\Kernel as HttpKernel;
-    
+
     class Kernel extends HttpKernel
     {
         /**
@@ -18,7 +19,7 @@
             \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
             \App\Http\Middleware\TrustProxies::class,
         ];
-        
+    
         /**
          * The application's route middleware groups.
          * @var array
@@ -33,13 +34,14 @@
                 \App\Http\Middleware\VerifyCsrfToken::class,
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
             ],
-            
+        
             'api' => [
                 'throttle:60,1',
                 'bindings',
+                'cors'
             ],
         ];
-        
+    
         /**
          * The application's route middleware.
          * These middleware may be assigned to groups or used individually.
@@ -54,5 +56,6 @@
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
             'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+            'cors' => HandleCors::class
         ];
     }

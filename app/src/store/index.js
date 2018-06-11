@@ -6,11 +6,19 @@ import Vuex
 import cart
 	from './cart';
 
+import global
+	from './global';
+
+import products
+	from './products';
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	modules: {
-		cart
+		cart,
+		global,
+		products
 	}
 });
 

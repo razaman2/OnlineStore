@@ -5,16 +5,24 @@
 
         <!-- (Optional) The Header -->
         <q-layout-header>
-            <q-toolbar>
+            <q-toolbar
+                    inverted>
                 <q-btn flat
                        round
                        icon="menu"
-                       @click="leftDrawer = !leftDrawer"/>
+                />
                 <q-toolbar-title>
-                    Online
-                    Store
-                    <span slot="subtitle">Shopping is fun...</span>
+                    online
+                    store
+                    <span slot="subtitle">the place where shopping is fun...</span>
                 </q-toolbar-title>
+                <q-tabs inverted>
+                    <q-route-tab
+                            label="products"
+                            to="/products"
+                            slot="title"
+                    />
+                </q-tabs>
                 <q-btn flat
                        round
                        icon="shopping_cart"
@@ -31,7 +39,7 @@
         <!-- (Optional) A Drawer; you can add one more with side="right" or change this one's side -->
         <q-layout-drawer
                 side="left"
-                v-model="leftDrawer">
+                v-model="lDrawer">
         </q-layout-drawer>
 
         <q-page-container>
@@ -50,11 +58,11 @@
 			watching: function () {
 				return this.$store.state.cart.watching;
 			},
-			leftDrawer: {
-				get () {
-					return this.$store.state.global.leftDrawer;
+			lDrawer: {
+				get: function () {
+					return this.$store.state.global.lDrawer;
 				},
-				set (value) {
+				set: function (value) {
 					this.$store.commit('global/leftDrawer', {value});
 				}
 			}
@@ -62,6 +70,3 @@
 		methods: {}
 	};
 </script>
-
-<style>
-</style>

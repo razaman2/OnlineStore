@@ -6,9 +6,9 @@
 
 <script>
 	export default {
-		name: 'App'
+		name: 'App',
+		beforeCreate: function () {
+			this.$store.dispatch('products/getProducts');
+		}
 	};
 </script>
-
-<style>
-</style>
