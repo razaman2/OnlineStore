@@ -10,6 +10,7 @@
                 <q-btn flat
                        round
                        icon="menu"
+                       @click="$store.commit('global/leftDrawer')"
                 />
                 <q-toolbar-title>
                     online
@@ -63,6 +64,7 @@
 					return this.$store.state.global.lDrawer;
 				},
 				set: function (value) {
+					console.log(value);
 					this.$store.commit('global/leftDrawer', {value});
 				}
 			}

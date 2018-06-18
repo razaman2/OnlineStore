@@ -1,8 +1,10 @@
 <template>
     <q-page padding
-            class="product">
+            class="product"
+    >
         <q-card v-for="(product, index) in products"
-                :key="index">
+                :key="index"
+        >
             <q-card-title>
                 {{product.name}}
             </q-card-title>
@@ -12,9 +14,16 @@
             <q-card-main>
                 {{product.description}}
             </q-card-main>
-            <q-card-separator/>
+            <q-card-main>
+                <p v-if="product.price"
+                   class="row justify-between">
+                    <span>${{product.price.toFixed(2)}}</span>
+                    <span>{{product.status}}</span>
+                </p>
+            </q-card-main>
             <q-card-actions
-                    align="end">
+                    align="end"
+            >
                 <q-btn flat
                        dense
                        color="secondary"
@@ -51,7 +60,8 @@
 <style scoped>
     .product {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        grid-gap: .5em;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 1em;
+        grid-column-gap: 2em;
     }
 </style>
