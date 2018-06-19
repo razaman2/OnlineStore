@@ -15,13 +15,19 @@ export default [{
 			component: () => import('pages/products')
 		}]
 	},
-	
 	{
 		path: '/cart',
 		component: () => import('layouts/main'),
 		children: [{
 			path: '',
 			component: () => import('pages/cart')
+		}]
+	}, {
+		path: '/new-product',
+		component: () => import('layouts/main'),
+		children: [{
+			path: '',
+			component: () => import('pages/new-product')
 		}]
 	},
 	

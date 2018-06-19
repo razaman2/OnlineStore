@@ -7,6 +7,9 @@
         >
             <q-card-title>
                 {{product.name}}
+                <q-icon name="arrow_back"
+                        color="green"
+                        @click.native="modify(product) $router.push('/new-product')"/>
             </q-card-title>
             <q-card-media>
                 <img :src="product.image">
@@ -52,6 +55,9 @@
 			},
 			watch: function (product) {
 				this.$store.commit('cart/watch', {product});
+			},
+			modify: function (product) {
+				this.$store.commit('products/set', {product});
 			}
 		}
 	};

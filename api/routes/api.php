@@ -19,5 +19,24 @@
     });
     
     Route::get("/products", function() {
-        return response()->json(\App\Models\Products::all());
+        return response()->json(\App\Models\Product::all());
+    });
+    
+    Route::post("/products/create", function(Request $request) {
+        $product = (new \App\Models\Product)->create($request->input("product"));
+        return response()->json($product);
+    });
+    
+    Route::post("/products/delete", function(Request $request) {
+        $product = (new \App\Models\Product)->destroy($request->input("product.id"));
+        return response()->json($product);
+    });
+    
+    Route::post("/products/update", function(Request $request) {
+        $product = (new \App\Models\Product)->find($request->input("product.id"))->update($request->input("product"));
+        return response()->json($product);
+    });
+    
+    Route::post("/products/images", function(Request $request) {
+        return $request->file();
     });

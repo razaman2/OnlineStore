@@ -23,6 +23,11 @@
                             to="/products"
                             slot="title"
                     />
+                    <q-route-tab
+                            label="new"
+                            to="/new-product"
+                            slot="title"
+                    />
                 </q-tabs>
                 <q-btn flat
                        round

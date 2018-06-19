@@ -114,7 +114,7 @@
 
     .grid-4 {
         display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-columns: 1fr 3fr 1fr;;
         justify-items: end;
     }
 
