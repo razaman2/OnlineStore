@@ -11,4 +11,8 @@
         public function getStatusAttribute($value) {
             return ucwords($value);
         }
+    
+        public function images() {
+            return $this->hasMany(ProductImage::class);
+        }
     }

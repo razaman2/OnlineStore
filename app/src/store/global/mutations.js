@@ -1,3 +1,3 @@
-export const leftDrawer = (state) => {
-	state.leftDrawer = !state.leftDrawer;
+export const example = (state) => {
+  //
 };

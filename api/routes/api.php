@@ -19,11 +19,15 @@
     });
     
     Route::get("/products", function() {
-        return response()->json(\App\Models\Product::all());
+        return response()->json(\App\Models\Product::with("images")->get());
     });
     
     Route::post("/products/create", function(Request $request) {
-        $product = (new \App\Models\Product)->create($request->input("product"));
+        return response()->json($request->input("product"));
+        $product = (new \App\Models\Product())->create($request->input("product"));
+        //    ->save()->images(collect($request->input("product.images"))->map(function($path) {
+        //    return (new \App\Models\ProductImage())->create(["path" => $path]);
+        //})->toArray());
         return response()->json($product);
     });
     
@@ -38,5 +42,5 @@
     });
     
     Route::post("/products/images", function(Request $request) {
-        return $request->file();
+        return $request->file("product-image")->store("product-images", "public");
     });

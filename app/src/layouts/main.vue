@@ -1,41 +1,40 @@
 <template>
     <q-layout
-            view="lHh Lpr lFf">
+      view="Lhh lpR ffr">
         <!-- Be sure to play with the Layout demo on docs -->
 
         <!-- (Optional) The Header -->
         <q-layout-header>
-            <q-toolbar
-                    inverted>
-                <q-btn flat
-                       round
-                       icon="menu"
-                       @click="$store.commit('global/leftDrawer')"
-                />
+          <q-toolbar
+            inverted>
+            <q-btn
+              flat
+              round
+              icon="menu"
+              @click="leftDrawer = !leftDrawer"/>
                 <q-toolbar-title>
-                    online
-                    store
-                    <span slot="subtitle">the place where shopping is fun...</span>
+                  Online-Store
                 </q-toolbar-title>
+            <!--<q-search v-model="search" color="none" />-->
                 <q-tabs inverted>
-                    <q-route-tab
-                            label="products"
-                            to="/products"
-                            slot="title"
-                    />
-                    <q-route-tab
-                            label="new"
-                            to="/new-product"
-                            slot="title"
-                    />
+                  <q-route-tab
+                    label="products"
+                    to="/products"
+                    slot="title"/>
+                  <q-route-tab
+                    label="new"
+                    to="/new-product"
+                    slot="title"/>
                 </q-tabs>
-                <q-btn flat
-                       round
-                       icon="shopping_cart"
-                       @click="$router.push('/cart')">
-                    <q-chip v-if="items.length > 0"
-                            floating
-                            color="red">
+            <q-btn
+              flat
+              round
+              icon="shopping_cart"
+              @click="$router.push('/cart')">
+              <q-chip
+                v-if="hasItems"
+                floating
+                color="red">
                         {{items.length}}
                     </q-chip>
                 </q-btn>
@@ -43,9 +42,9 @@
         </q-layout-header>
 
         <!-- (Optional) A Drawer; you can add one more with side="right" or change this one's side -->
-        <q-layout-drawer
-                side="left"
-                v-model="lDrawer">
+      <q-layout-drawer
+        side="left"
+        v-model="leftDrawer">
         </q-layout-drawer>
 
         <q-page-container>
@@ -57,23 +56,22 @@
 
 <script>
 	export default {
+    data () {
+      return {
+        search: null,
+        leftDrawer: false
+      };
+    },
 		computed: {
-			items: function () {
+      items () {
 				return this.$store.state.cart.items;
 			},
-			watching: function () {
+      watching () {
 				return this.$store.state.cart.watching;
 			},
-			lDrawer: {
-				get: function () {
-					return this.$store.state.global.lDrawer;
-				},
-				set: function (value) {
-					console.log(value);
-					this.$store.commit('global/leftDrawer', {value});
-				}
-			}
-		},
-		methods: {}
+      hasItems () {
+        return this.items.length > 0;
+      }
+    }
 	};
 </script>

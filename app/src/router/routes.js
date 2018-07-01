@@ -22,7 +22,7 @@ export default [{
 			path: '',
 			component: () => import('pages/cart')
 		}]
-	}, {
+  }, {
 		path: '/new-product',
 		component: () => import('layouts/main'),
 		children: [{
