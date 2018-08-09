@@ -1,14 +1,13 @@
 <template>
-    <div id="q-app">
-        <router-view/>
-    </div>
+  <div id="q-app">
+    <router-view/>
+  </div>
 </template>
 
 <script>
-	export default {
-		name: 'App',
-		beforeCreate: function () {
-			this.$store.dispatch('products/getProducts');
-		}
-	};
+  export default {
+    name: 'App'
+  };
 </script>
+
+<style></style>

@@ -1,6 +1,6 @@
 import axios
-	from 'axios';
+  from 'axios';
 
 export default ({Vue}) => {
-	Vue.prototype.$axios = axios;
+  Vue.prototype.$axios = axios;
 }

@@ -1,25 +1,32 @@
 import Vue
-	from 'vue';
+  from 'vue';
 import Vuex
-	from 'vuex';
+  from 'vuex';
 
 import cart
-	from './cart';
+  from './cart';
 
 import global
-	from './global';
+  from './global';
 
 import products
-	from './products';
+  from './products';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
-	modules: {
-		cart,
-		global,
-		products
-	}
-});
+/*
+ * If not building with SSR mode, you can
+ * directly export the Store instantiation
+ */
 
-export default store;
+export default function (/* { ssrContext } */) {
+  const Store = new Vuex.Store({
+    modules: {
+      cart,
+      global,
+      products
+    }
+  });
+  
+  return Store;
+}

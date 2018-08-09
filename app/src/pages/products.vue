@@ -1,69 +1,39 @@
 <template>
-  <q-page
-    padding
-    class="product">
-    <q-card
-      v-for="(product, index) in products"
-      :key="index">
+  <q-page padding class="product">
+    <q-card v-for="(product, index) in products" :key="index">
 
       <q-card-title>
-        <div
-          class="product-title">
-          {{product.name
-          |
-          truncate}}
-          <q-icon
-            class="icon"
-            name="menu"
-            @click.native="modify(product) $router.push('/new-product');"/>
+        <div class="product-title">
+          {{product.name | truncate}}
+          <q-icon class="icon" name="menu" @click.native="modify(product) $router.push('/new-product');"/>
         </div>
-            </q-card-title>
+      </q-card-title>
 
-            <q-card-media>
-              <q-carousel
-                arrows
-                quick-nav
-                color="white"
-                height="300px">
-                <q-carousel-slide
-                  v-for="(image, index) in product.images"
-                  :key="index"
-                  :img-src="image.path"/>
-              </q-carousel>
-            </q-card-media>
+      <q-card-media>
+        <q-carousel arrows quick-nav color="white" height="300px">
+          <q-carousel-slide v-for="(image, index) in product.images" :key="index" :img-src="image.path"/>
+        </q-carousel>
+      </q-card-media>
 
-            <q-card-main>
-              <p>
-                {{product.description}}</p>
-            </q-card-main>
+      <q-card-main>
+        <p>
+          {{product.description}}</p>
+      </q-card-main>
 
-            <q-card-main>
-              <p
-                v-if="product.price"
-                class="row justify-between">
-                <span><sup>$</sup>{{currency(product.price)}}</span>
-                    <span>{{product.status}}</span>
-                </p>
-            </q-card-main>
+      <q-card-main>
+        <p v-if="product.price" class="row justify-between">
+          <span><sup>$</sup>{{currency(product.price)}}</span>
+          <span>{{product.status}}</span>
+        </p>
+      </q-card-main>
 
-      <q-card-actions
-        align="end">
-        <q-btn
-          flat
-          dense
-          color="secondary"
-          label="add to cart"
-          @click="add(product)"/>
-        <q-btn
-          flat
-          dense
-          color="orange"
-          label="watch"
-          @click="watch(product)"/>
-            </q-card-actions>
+      <q-card-actions align="end">
+        <q-btn flat dense color="secondary" label="add to cart" @click="add(product)"/>
+        <q-btn flat dense color="orange" label="watch" @click="watch(product)"/>
+      </q-card-actions>
 
     </q-card>
-    </q-page>
+  </q-page>
 </template>
 
 <script>
