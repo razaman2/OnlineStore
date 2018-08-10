@@ -6,8 +6,12 @@
 
 <script>
   export default {
-    name: 'App'
+    name: 'App',
+    beforeMount: function () {
+      this.$store.dispatch({
+        type: 'products/add',
+        vue: this
+      });
+    },
   };
 </script>
-
-<style></style>

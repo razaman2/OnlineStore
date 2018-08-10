@@ -3,7 +3,7 @@
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
-    plugins: ['i18n', 'axios'],
+    plugins: ['i18n', 'axios', 'firebase'],
     css: ['app.styl'],
     extras: [ctx.theme.mat ? 'roboto-font' : null, 'material-icons' // optional, you are not bound to it
       // 'ionicons',
