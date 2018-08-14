@@ -1,7 +1,13 @@
 import * as functions
   from 'firebase-functions';
 
-const admin = require('firebase-admin');
+import * as cors
+  from 'cors';
+
+import * as admin
+  from "firebase-admin";
+
+const corsHandler = cors({origin: true});
 
 admin.initializeApp();
 
@@ -12,14 +18,10 @@ export const functionSupreme = functions.https.onRequest((request, response) => 
   response.send(request.query);
 });
 
-export const getProducts = functions.https.onRequest((request, response) => {
-  admin.firestore().collection("product").get().then(function (querySnapshot) {
-    let results = [];
-    querySnapshot.forEach(function (doc) {
-      let record = doc.data();
-      record.id = doc.id;
-      results.push(record);
-    });
-    response.send(results);
+// export const productImages = functions.storage.
+
+export const fileUpload = functions.https.onRequest((request, response) => {
+  corsHandler(request, response, () => {
+    response.send(request)
   });
 });

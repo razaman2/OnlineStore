@@ -4,12 +4,12 @@
       <q-card-title>
         <div class="product-title">
           {{product.name | truncate}}
-          <q-icon class="icon" name="menu" @click.native="modify(product) $router.push('/new-product');"/>
+          <q-icon class="icon" name="menu" @click.native="modify(product.id)"/>
         </div>
       </q-card-title>
       <q-card-media>
         <q-carousel arrows quick-nav color="white" height="300px">
-          <q-carousel-slide v-for="(image, index) in product.images" :key="index" :img-src="image.path"/>
+          <q-carousel-slide v-for="(image, index) in product.images" :key="index" :img-src="image"/>
         </q-carousel>
       </q-card-media>
       <q-card-main>
@@ -19,7 +19,7 @@
       <q-card-main>
         <p v-if="product.price" class="row justify-between">
           <span><sup>$</sup>{{currency(product.price)}}</span>
-          <span>{{product.status}}</span>
+          <!--<span>{{product.status}}</span>-->
         </p>
       </q-card-main>
       <q-card-actions align="end">
@@ -46,8 +46,8 @@
       watch (product) {
         this.$store.commit('cart/watch', {product});
       },
-      modify (product) {
-        this.$store.commit('products/update', product);
+      modify (id) {
+        this.$router.push(`product/update/${id}`);
       },
       currency (value) {
         return currency(value);

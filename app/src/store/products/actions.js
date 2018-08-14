@@ -1,57 +1,59 @@
 export const add = (state, action) => {
-  action.vue.$firebase.firestore().collection('product').onSnapshot(collection => {
+  action.vue.$firebase.firestore().collection('products').onSnapshot(collection => {
     collection.docChanges().forEach(snapshot => {
-      if(snapshot.type === 'added') {
-        state.commit('add', snapshot.doc.data());
-      } else if(snapshot.type === 'modified') {
-        state.commit('modify', snapshot.doc.data());
-      } else if(snapshot.type === 'removed') {
-        state.commit('remove', snapshot.doc.data());
+      if(itemWasAdded(snapshot)) {
+        state.commit('add', build(snapshot));
+      } else if(itemWasModified(snapshot)) {
+        state.commit('modify', build(snapshot));
+      } else if(itemWasRemoved(snapshot)) {
+        state.commit('remove', build(snapshot));
       }
     });
   });
-  // let products = collection.onSnapshot(collection => {
-  //   collection.docs.forEach(snapshot => {
-  //     snapshot.ref.onSnapshot(product => {
-  //       state.commit('add', {...product.data(), id: product.id});
-  //     })
-  //   })
-  // });
-  
-  
-  // action.vue.$firebase.firestore().collection('product')
-  // .get().then(collection => {
-  //   collection.docs.forEach(snapshot => {
-  //     snapshot.ref.onSnapshot(product => {
-  //       state.commit('add', {...product.data(), id: product.id});
-  //     })
-  //   });
-  // });
+};
+
+function build (snapshot) {
+  console.log(snapshot);
+  return {
+    ...snapshot.doc.data(),
+    id: snapshot.doc.id
+  };
+}
+
+function itemWasAdded (snapshot) {
+  return snapshot.type === 'added';
+}
+
+function itemWasRemoved (snapshot) {
+  return snapshot.type === 'removed';
+}
+
+function itemWasModified (snapshot) {
+  return snapshot.type === 'modified';
+}
+
+export const images = (state, action) => {
+  return action.vue.$firebase.storage().ref().child(`ProductImages/${action.file.name}`).put(action.file).then(snapshot => {
+    return snapshot.ref.getDownloadURL();
+  }).catch(error => {
+    console.log(error);
+  });
 };
 
 export const create = (state, action) => {
-  // let collection = action.vue.$firebase.firestore().collection('product');
-  // let product = collection.doc().set(action.product);
-  // let success = product.then(success => {
-  //   console.log("Product Was Created Successfully", success);
-  // });
-  // let error = product.catch(error => {
-  //   console.log("Error Creating Product", error);
-  // });
-  // console.log("Creating Product", collection, product, success, error);
-  action.vue.$firebase.firestore().collection('product').doc().add(action.product).catch(error => {
+  action.vue.$firebase.firestore().collection('products').add(action.product).catch(error => {
     console.log('Error Creating Product', error);
   });
 };
 
 export const update = (state, action) => {
-  action.vue.$firebase.firestore().collection('product').doc(action.product.id).update(action.product).catch(error => {
+  action.vue.$firebase.firestore().collection('products').doc(action.product.id).update(action.product).catch(error => {
     console.log('Error Updating Product', error);
   });
 };
 
 export const remove = (state, action) => {
-  action.vue.$firebase.firestore().collection('product').doc(action.product.id).delete().catch(error => {
+  action.vue.$firebase.firestore().collection('products').doc(action.product.id).delete().catch(error => {
     console.log('Error Removing Product', error);
   });
 };
